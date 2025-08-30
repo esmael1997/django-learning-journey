@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>post list</title>
+</head>
+<body>
+    <h1>posts list</h1>
+    {% for post in posts %}
+        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+        <p>{{ post.published_date }}</p>
+        </p>
+    {% empty %}
+        <p>{{ post.content|truncatewords:20 }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>
