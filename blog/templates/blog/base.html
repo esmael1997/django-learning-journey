@@ -1,0 +1,27 @@
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Blog{% endblock %}</title>
+</head>
+<body>
+
+   
+    {% if messages %}
+      <div id="popup-messages">
+        {% for message in messages %}
+          <div class="popup {{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+   
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

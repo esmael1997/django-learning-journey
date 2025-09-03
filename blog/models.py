@@ -10,3 +10,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 # Create your models here.
+class Ticket(models.Model):
+    name = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField()

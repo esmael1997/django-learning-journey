@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ post.title }}</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
     <h1>{{ post.title }}</h1>
     <p><strong>publish date:</strong> {{ post.published_date }}</p>
     <p><strong>views:</strong> {{ post.counted_view }}</p>
@@ -22,5 +21,4 @@
         <a href="{% url 'post_detail' next_post.pk %}">{{ next_post.title }} →</a>
       {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

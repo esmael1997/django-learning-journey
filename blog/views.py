@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
+from .forms import TicketForm
+from django.contrib import messages
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now())
@@ -24,3 +26,18 @@ def post_detail(request, pk):
     })
 
 # Create your views here.
+def ticket_view(request):
+    if request.method == 'POST':
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)   
+            ticket.name = "unknown"              
+            ticket.save()
+            messages.success(request, "Your ticket was successfully registered")
+            return redirect('ticket_success')
+        else:
+            messages.error(request, "please check again form")
+    else:
+            
+        form = TicketForm()
+    return render(request, 'ticket_form.html', {'form': form})
