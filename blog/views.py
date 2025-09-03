@@ -6,6 +6,7 @@ from django.contrib import messages
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now())
+    latest_posts = posts.order_by('-published_date')[:8]
     return render(request,'blog/post_list.html', {'posts':posts})
 
 def post_detail(request, pk):

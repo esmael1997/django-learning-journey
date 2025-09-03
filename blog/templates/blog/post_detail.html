@@ -1,14 +1,17 @@
 {% extends "base.html" %}
+{% load blog_tags %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <p><strong>publish date:</strong> {{ post.published_date }}</p>
-    <p><strong>views:</strong> {{ post.counted_view }}</p>
+    <p><strong>Publish date:</strong> {{ post.published_date }}</p>
+    <p><strong>Views:</strong> {{ post.counted_view }}</p>
     <p>{{ post.content }}</p>
 
-    <a href="{% url 'post_list' %}">back to list</a>
+    <div class="back-link">
+        <a href="{% url 'post_list' %}">Back to list</a>
+    </div>
 
     <hr>
 

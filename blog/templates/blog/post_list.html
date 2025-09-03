@@ -4,11 +4,12 @@
 {% block title %}Post List{% endblock %}
 
 {% block content %}
-    <h1>posts list</h1>
+    <h1>Posts List</h1>
+
     {% for post in posts %}
         <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-        <p>{{ post.published_date }}</p>
         <p>{{ post.content|truncatewords:20 }}</p>
+        <small>Published: {{ post.published_date }}</small>
         <hr>
     {% empty %}
         <p>No posts yet.</p>
@@ -18,6 +19,11 @@
 
     <div class="latest-posts">
         <h2>Latest Posts</h2>
-        {% latest_posts 8 %}
+        {% for post in latest_posts %}
+            <h3><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+            <p>{{ post.content|truncatewords:20 }}</p>
+        {% empty %}
+            <p>No latest posts.</p>
+        {% endfor %}
     </div>
 {% endblock %}

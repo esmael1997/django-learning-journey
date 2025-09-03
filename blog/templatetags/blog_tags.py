@@ -8,4 +8,6 @@ register = template.Library()
 def show_latset_posts(count=8):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:count]
     return {'latest_posts': posts}
-
+@register.simple_tag
+def latest_posts(n=8):
+    return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:n]
