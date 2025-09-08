@@ -5,6 +5,8 @@ from .forms import TicketForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm
+from django.contrib.auth import login
+from .forms import SignUpForm
 
 
 
@@ -50,3 +52,14 @@ def ticket_view(request):
 class CustomLoginView(LoginView):
     form_class = LoginForm
     template_name = "blog/login.html"
+    
+def signup_view(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("post_list")
+    else:
+        form = SignUpForm()
+    return render(request, "blog/signup.html", {"form":form})
