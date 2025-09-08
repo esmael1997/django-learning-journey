@@ -5,7 +5,7 @@ from .forms import TicketForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
 
 
@@ -58,6 +58,8 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(request, username=user.username, password=raw_password)
             login(request, user)
             return redirect("post_list")
     else:
