@@ -3,6 +3,10 @@ from django.utils import timezone
 from .models import Post
 from .forms import TicketForm
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
+from .forms import LoginForm
+
+
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now())
@@ -42,3 +46,7 @@ def ticket_view(request):
             
         form = TicketForm()
     return render(request, 'ticket_form.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = "blog/login.html"
