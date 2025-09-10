@@ -125,7 +125,6 @@ def password_reset_confirm(request, uidb64, token):
         return redirect("password_reset")
 
 
-# استفاده از UserCreationForm بجای RegisterForm
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
