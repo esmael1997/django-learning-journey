@@ -24,3 +24,42 @@
 
 </body>
 </html>
+
+
+<!-- templates/accounts/password_reset_request.html -->
+
+
+
+  <h2>recovery password</h2>
+
+  {% if messages %}
+    {% for msg in messages %}
+      <div class="message {{ msg.tags }}">{{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">recovery link</button>
+  </form>
+  
+
+<!-- templates/accounts/password_reset_confirm.html -->
+
+
+
+  <h2>Set a new password</h2>
+
+  {% if messages %}
+    {% for msg in messages %}
+      <div class="message {{ msg.tags }}">{{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register a new password </button>
+  </form>
+

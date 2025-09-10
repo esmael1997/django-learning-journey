@@ -27,3 +27,6 @@ class SignUpForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("this email has already been registered")
         return email
+    
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(label="email", max_length=254)
