@@ -134,3 +134,10 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, "registration/register.html", {"form": form})
+
+EXCLUDE_PATHS = ["/admin/"]
+
+def coming_soon(request):
+    if request.path in EXCLUDE_PATHS:
+        return redirect(request.path)
+    return render(request, "coming_soon.html")
